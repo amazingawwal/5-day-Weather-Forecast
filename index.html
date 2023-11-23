@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="./starter/style.css" />
+  <title>Weather Dashboard</title>
+</head>
+
+<body>
+  <header class="container-fluid text-center text-white bg-dark p-2 weather-header">
+    <h1>Weather Dashboard</h1>
+  </header>
+
+  <!-- max-width for ultra wide resolutions -->
+  <div class="container-fluid" style="max-width: 1400px">
+    <div class="row">
+      <aside class="col-lg-3 pb-3">
+        <h2 id="form-heading" class="mt-1 h3 form-label">
+          Search for a City:
+        </h2>
+        <form id="search-form" class="form">
+          <div class="form-inline form-group">
+            <div class="input-group">
+              <input class="form-input weather-search" type="text" id="search-input" placeholder="London"
+                aria-labelledby="form-heading" aria-controls="today forecast" />
+              <div class="input-group-append">
+                <button type="submit" class="btn search-button" id="search-button" aria-label="submit search">
+                  Search
+                </button>
+                <hr class="hr weather-hr" />
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="list-group" id="history"></div>
+      </aside>
+
+      <div class="col-lg-9 pb-3">
+        <div class="container">
+        <section id="today" class=" row mt-3" role="region" aria-live="polite" style="border: 1px solid black;">
+          <h2 id="location"></h2>
+          <p id="current-temp"></p>
+          <p id="current-wind"></p>
+          <p id="current-humidity"></p>
+        </section>
+        <section id="forecast" class="row mt-3 forecast-days" role="region" aria-live="polite"style="height:60%; border: 1px solid black;">
+          <h5>5-Day Weather Forecast:</h5>
+          <!-- <div class="col forecast-day">f1
+            <h5 id="forecast-date1">1</h5>
+            <p id="icon-day1">2</p>
+            <p id="temp-day1">3</p>
+            <p id="wind-day1">4</p>
+            <p id="humidity-day1">5</p>
+          </div>
+          <div class="col forecast-day">f2</div>
+          <div class="col forecast-day">f3</div>
+          <div class="col forecast-day">f4</div>
+          <div class="col forecast-day">f5</div> -->
+        </section>
+       </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day.js -->
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <!-- Vanilla JS -->
+  <script src="./starter/script.js"></script>
+</body>
+
+</html>

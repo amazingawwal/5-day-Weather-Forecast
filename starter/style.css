@@ -1,0 +1,8 @@
+.forecast-day{
+    background-color: darkgray;
+}
+
+.forecast-days{
+    display: flex;
+    gap: 1rem;
+}
