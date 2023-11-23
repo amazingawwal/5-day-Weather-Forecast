@@ -13,14 +13,20 @@ var tempK = document.querySelector("#current-temp");
 var windEl = document.querySelector("#current-wind");
 var humidityEl = document.querySelector("#current-humidity");
 var forecastEl = document.querySelector("#forecast");
+var inputListEl = document.querySelector("#input-list");
 
 searchBtn.addEventListener("click", function(e){
     e.preventDefault();
     console.log(searchValue.value);
     var queryURL = apiURL +  "q=" + searchValue.value + "&appid=" + APIKey;
     console.log(queryURL)
+    var locationButton = document.createElement("button");
+    locationButton.textContent = searchValue.value;
+    inputListEl.appendChild(locationButton);
     searchValue.value = "";
-// We then created an Fetch call
+    forecastEl.innerHTML = "",
+    
+//  create a Fetch call
     fetch(queryURL)
     .then(function(response){
         return response.json();
@@ -29,12 +35,13 @@ searchBtn.addEventListener("click", function(e){
         console.log(data);
         var icon = data.list[0].weather[0].icon;
         var pop = document.createElement("i");
-        pop.className ="fas fa-"+ icon;
-        document.body.appendChild(pop);
-        displayLocation.appendChild(pop);
+        pop.innerHTML ="<img src=http://openweathermap.org/img/wn/"+ icon +"@2x.png>";
+        
+        
         console.log(pop)
 
-        displayLocation.textContent = data.city.name + " ("+todaysDate+")"+icon;
+        displayLocation.textContent = data.city.name + " ("+todaysDate+")";
+        displayLocation.appendChild(pop);
         console.log("(",todaysDate,")")
         var tempKelvin = data.list[0].main.temp-273.15;
         var tempC = Math.round(tempKelvin*100)/100;
@@ -47,18 +54,53 @@ searchBtn.addEventListener("click", function(e){
         var humidity = data.list[0].main.humidity;
         humidityEl.textContent = "Humidity: " + humidity + "%";
 
-        for (var i=1; i<6; i++){
+        for (var i=4; i<data.list.length; i+=8){
             //create div for col
             var forecastDays = document.createElement("div");
             // add the class col
-            forecastDays.classList.add("col");
-            //append it to the section tag
+            forecastDays.classList.add("col", "forecast-day");
+            //append div col to the section tag
             forecastEl.appendChild(forecastDays);
             //create h5 for date
             var dateEL = document.createElement("h5");
+            //get date from API
             var firstDate = data.list[i].dt_txt;
+            firstDate = dayjs(firstDate).format("DD/MM/YYYY")
+            console.log(firstDate)
+            // add date to dateEl
             dateEL.textContent = firstDate;
 
+            //create i tag for icon
+            var iconEl = document.createElement("i");
+            var weatherIcon = data.list[i].weather[0].icon;
+            //iconEl.classList.add("fas fa-"+ weatherIcon);
+            iconEl.innerHTML = "<img src=http://openweathermap.org/img/wn/"+weatherIcon+"@2x.png>";
+
+            // add temp forecast
+            var tempEl = document.createElement("p");
+            var newTempKelvin = data.list[i].main.temp-273.15;
+            var newTempC = Math.round(newTempKelvin*100)/100;
+            tempEl.textContent = "Temp: "+ newTempC + ' \u00B0C';
+
+            // add wind forecast
+            var windForecastEl = document.createElement("p");
+            var windForecast = data.list[i].wind.speed;
+            windForecastEl.textContent ="Wind: "+ windForecast + " KPH";
+
+
+            //add humidity forecast
+            var humidityForecastEl = document.createElement("p");
+            var humidityForecast = data.list[i].main.humidity;
+            humidityForecastEl.textContent = "Humidity: " + humidityForecast + "%";
+
+
+
+
+            // append all forecast elements to div col
+            $(forecastDays).append(dateEL, iconEl, tempEl, windForecastEl, humidityForecastEl);
+            
+
+            
         };
 
 

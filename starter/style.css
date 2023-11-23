@@ -6,3 +6,30 @@
     display: flex;
     gap: 1rem;
 }
+
+.input-group-append{
+    /* display: block; */
+    /* flex-direction: row; */
+    gap: 2 rem;
+}
+
+.input-group{
+    display: flex;
+    flex-direction: column;
+    padding: 2 rem;
+    
+}
+
+.input-list{
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    width: 100%;
+}
+
+
+#search-button{
+    width: 100%;
+    background-color: lightblue;
+    padding-bottom: 1 rem;
+}
