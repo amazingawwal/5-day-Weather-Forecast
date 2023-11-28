@@ -25,7 +25,7 @@ function start(e) {
 
 function runAPI(userInput) {
     var queryURL = apiURL + "q=" + userInput + "&appid=" + APIKey;
-
+    
     //  create a Fetch call
     fetch(queryURL)
         .then(function (response) {
@@ -53,6 +53,8 @@ function runAPI(userInput) {
 
             var humidity = data.list[0].main.humidity;
             humidityEl.textContent = "Humidity: " + humidity + "%";
+
+            
 
             for (var i = 4; i < data.list.length; i += 8) {
                 //create div for col
@@ -130,13 +132,21 @@ function createButtons(city) {
 
 function searchHistoryBtn(e) {
     runAPI(e.target.textContent)
+    forecastEl.innerHTML = "";
 }
 
 
+for(var j=0; j<cityHistory.length; j++){
+    createButtons(cityHistory[j])
+};
 
-cityHistory.forEach(function (city) {
-    createButtons(city)
-})
+
+
+
+
+// cityHistory.forEach(function (city) {
+//     createButtons(city)
+// })
 
 
 

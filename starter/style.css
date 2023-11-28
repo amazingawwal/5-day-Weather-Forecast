@@ -23,13 +23,19 @@
 .input-list{
     display: flex;
     flex-direction: column;
-    gap: 5%;
+    gap: 1rem;
     width: 100%;
 }
 
 
-#search-button{
+
+.search-button  {
     width: 100%;
     background-color: lightblue;
-    padding-bottom: 1 rem;
+    padding-bottom: 5 rem;
 }
+
+.btn{
+    padding-top: 5 rem;
+}
+
